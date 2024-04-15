@@ -1,0 +1,27 @@
+server:
+  port: 8761
+  tomcat:
+    accesslog:
+      enabled: true
+    threads:
+      min-spare: 300
+      max: 3000
+    connection-timeout: 10000
+  servlet:
+    encoding:
+      force: true
+      charset: UTF-8
+
+spring:
+  application:
+    name: service registry
+
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://localhost:${server.port}/eureka/
+  instance:
+    app name: ${spring.application.name}
+    prefer-ip-address: false

@@ -1,0 +1,33 @@
+server:
+  port: 9500
+  tomcat:
+    accesslog:
+      enabled: true
+    threads:
+      min-spare: 300
+      max: 3000
+    connection-timeout: 10000
+  servlet:
+    encoding:
+      force: true
+      charset: UTF-8
+
+spring:
+  application:
+    name: employee-server
+
+service:
+  baseUrl: "/services/employee"
+  swagger:
+    version: 'version1.0.0-1403/01/27'
+    title: 'employee server'
+    description: 'employee server'
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    appname: ${spring.application.name}
+    hostname: localhost
