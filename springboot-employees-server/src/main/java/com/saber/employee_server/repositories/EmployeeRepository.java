@@ -18,6 +18,7 @@ public interface EmployeeRepository {
     Employee findByPersonalCode(Integer personalCode);
 
     Employee findByPersonalCodeAndNationalCode(String nationalCode, Integer personalCode);
+    List<Employee> findAllByPersonalCodeAndNationalCode(String nationalCode, Integer personalCode);
     Boolean existByPersonalCodeAndNationalCode(String nationalCode, Integer personalCode);
     Boolean existById(Integer id);
 }

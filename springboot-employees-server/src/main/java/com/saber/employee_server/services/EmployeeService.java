@@ -1,5 +1,6 @@
 package com.saber.employee_server.services;
 
+import com.saber.employee_server.dto.EmployeeDeleteResponse;
 import com.saber.employee_server.dto.EmployeeDto;
 import com.saber.employee_server.model.Employee;
 
@@ -11,5 +12,5 @@ public interface EmployeeService {
     List<Employee> getAll();
     Employee getEmployeeByNationalCodeAndPersonalCode(String nationalCode,Integer personalCode);
     Employee getById(Integer id);
-    void deleteById(Integer id);
+    EmployeeDeleteResponse deleteById(Integer id);
 }

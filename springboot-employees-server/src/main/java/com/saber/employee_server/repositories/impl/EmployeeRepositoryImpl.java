@@ -67,6 +67,14 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     }
 
     @Override
+    public List<Employee> findAllByPersonalCodeAndNationalCode(String nationalCode, Integer personalCode) {
+        return employeeDataBase.values().stream()
+                .filter(e -> e.getPersonalCode().equals(personalCode)
+                        && e.getNationalCode().equals(nationalCode))
+                .toList();
+    }
+
+    @Override
     public Boolean existByPersonalCodeAndNationalCode(String nationalCode, Integer personalCode) {
         return employeeDataBase.values().stream()
                 .anyMatch(e -> e.getPersonalCode().equals(personalCode)
