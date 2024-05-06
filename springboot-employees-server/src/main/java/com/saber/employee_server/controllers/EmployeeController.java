@@ -192,7 +192,37 @@ public class EmployeeController {
             @ApiResponse(responseCode = "504", description = "GATEWAY_TIMEOUT",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))}),
     })
-    public ResponseEntity<Employee> getEmployeeByNationalCodeAndPersonalCode(String nationalCode, Integer personalCode) {
+    public ResponseEntity<Employee> getEmployeeByNationalCodeAndPersonalCode(@RequestParam String nationalCode,@RequestParam Integer personalCode) {
         return ResponseEntity.ok(employeeService.getEmployeeByNationalCodeAndPersonalCode(nationalCode, personalCode));
+    }
+
+    @GetMapping(value = "/{id}")
+    @Operation(method = "GET", summary = "get employee by id"
+            , description = "get employee by id"
+            , operationId = "getEmployeeById"
+            , parameters = {
+            @Parameter(name = "id", in = ParameterIn.PATH, example = "1")
+    }, responses = {
+            @ApiResponse(responseCode = "200", description = "Success",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Employee.class))}),
+            @ApiResponse(responseCode = "400", description = "BAD_REQUEST",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))}),
+            @ApiResponse(responseCode = "401", description = "UNAUTHORIZED",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))}),
+            @ApiResponse(responseCode = "403", description = "FORBIDDEN",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))}),
+            @ApiResponse(responseCode = "404", description = "NOT_FOUND",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))}),
+            @ApiResponse(responseCode = "406", description = "NOT_ACCEPTABLE",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))}),
+            @ApiResponse(responseCode = "500", description = "INTERNAL_SERVER_ERROR",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))}),
+            @ApiResponse(responseCode = "503", description = "SERVICE_UNAVAILABLE",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))}),
+            @ApiResponse(responseCode = "504", description = "GATEWAY_TIMEOUT",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))}),
+    })
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable Integer id) {
+        return ResponseEntity.ok(employeeService.getById(id));
     }
 }

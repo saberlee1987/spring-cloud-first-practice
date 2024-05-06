@@ -19,7 +19,7 @@ spring:
 service:
   baseUrl: "/services/employee"
   swagger:
-    version: 'version1.0.0-1403/01/27'
+    version: 'version1.0.0-1403/02/17'
     title: 'employee server'
     description: 'employee server'
 

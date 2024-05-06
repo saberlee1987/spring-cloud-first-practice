@@ -9,6 +9,7 @@ import com.saber.employee_server.repositories.EmployeeRepository;
 import com.saber.employee_server.services.EmployeeService;
 import com.saber.common.dto.BusinessException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final EmployeeMapper employeeMapper;
@@ -68,7 +70,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee getEmployeeByNationalCodeAndPersonalCode(String nationalCode, Integer personalCode) {
         Employee employee = employeeRepository.findByPersonalCodeAndNationalCode(nationalCode, personalCode);
         if (employee == null) {
-            throw new BusinessException(getMessageBundle("employee.resource.duplicate"
+            throw new BusinessException(getMessageBundle("employee.resource.notfound"
                     , personalCode, nationalCode));
         }
         return employee;
@@ -76,10 +78,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee getById(Integer id) {
+        log.info("Request get employee by id {}",id);
         Employee employee = employeeRepository.findById(id);
         if (employee == null) {
             throw new BusinessException(getMessageBundle("employee.resource.notfound", id));
         }
+        log.info("Response employee by id {} ===> {}",id,employee);
         return employee;
     }
 
