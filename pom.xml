@@ -22,6 +22,7 @@
         <module>springboot-eureka-server-demo</module>
         <module>springboot-employees-server</module>
         <module>common</module>
+        <module>springboot-employee-client</module>
     </modules>
 
     <dependencies>

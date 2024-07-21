@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,8 +70,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         HttpStatus status = HttpStatus.NOT_ACCEPTABLE;
         errorResponseDto.setCode(status.value());
         errorResponseDto.setMessage(status.getReasonPhrase());
-        errorResponseDto.setOriginalMessage(String.format("{\"code\":\"%s\",\"message\":\"%s\"}"
-                , status.value(), ex.getMessage()));
+        if (ex.getMessage() != null) {
+            if (ex.getMessage().trim().startsWith("{") && ex.getMessage().trim().endsWith("}")) {
+                errorResponseDto.setOriginalMessage(ex.getMessage());
+            } else {
+                errorResponseDto.setOriginalMessage(String.format("{\"code\":\"%s\",\"message\":\"%s\"}"
+                        , status.value(), ex.getMessage()));
+            }
+        }
         log.error("Error ==> {}", errorResponseDto);
         return ResponseEntity.status(status).body(errorResponseDto);
     }

@@ -1,5 +1,5 @@
 server:
-  port: 9500
+  port: 9501
   tomcat:
     accesslog:
       enabled: true
@@ -14,14 +14,16 @@ server:
 
 spring:
   application:
-    name: employee
+    name: employee-client
 
 service:
-  baseUrl: "/services/employee"
+  baseUrl: "/services/employee-client"
   swagger:
-    version: 'version1.0.0-1403/02/17'
-    title: 'employee server'
-    description: 'employee server'
+    version: 'version1.0.0-1403/04/31'
+    title: 'employee client'
+    description: 'employee client'
+  employee:
+    name: employee
 
 
 eureka:
